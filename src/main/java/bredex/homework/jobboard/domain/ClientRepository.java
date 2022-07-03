@@ -4,5 +4,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClientRepository {
-    String registerClient (Client client);
+
+    String registerClient(Client client);
+
+    boolean isKeyValid(String key);
 }

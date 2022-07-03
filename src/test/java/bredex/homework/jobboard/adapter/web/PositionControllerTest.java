@@ -34,7 +34,7 @@ class PositionControllerTest {
     void init() {
 
         validPositionDTO = new PositionDTO("Position name", "MyLocation");
-        validAPIKey = getValidKeyFromDatabase();
+        validAPIKey = "12345678-aaaa-bbbb-1234-000000000001";
         invalidAPIKey = "12345678-aaaa-bbbb-1234-000000000000";
 
     }
@@ -44,7 +44,7 @@ class PositionControllerTest {
     void requestStatusShouldBeOKWithCorrectRequest() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/position")
-                        .header("token", validAPIKey)
+                        .header("API_key", validAPIKey)
                         .content(asJsonString(validPositionDTO))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -56,7 +56,7 @@ class PositionControllerTest {
     void correctRequestShouldReturnWithAnURL() throws Exception {
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/position")
-                        .header("token", validAPIKey)
+                        .header("API_key", validAPIKey)
                         .content(asJsonString(validPositionDTO))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andReturn();
@@ -70,13 +70,13 @@ class PositionControllerTest {
         PositionDTO invalidPosition = new PositionDTO("PositionNamePositionNamePositionNamePositionNamePositionName", "Location");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/position")
-                        .header("token", validAPIKey)
+                        .header("API_key", validAPIKey)
                         .content(asJsonString(invalidPosition))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/position")
-                        .header("token", validAPIKey)
+                        .header("API_key", validAPIKey)
                         .content(asJsonString(invalidPosition))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andReturn();
@@ -89,13 +89,13 @@ class PositionControllerTest {
         PositionDTO invalidPosition = new PositionDTO("Position name", "LocationLocationLocationLocationLocationLocationLocation");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/position")
-                        .header("token", validAPIKey)
+                        .header("API_key", validAPIKey)
                         .content(asJsonString(invalidPosition))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/position")
-                        .header("token", validAPIKey)
+                        .header("API_key", validAPIKey)
                         .content(asJsonString(invalidPosition))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andReturn();
@@ -108,13 +108,13 @@ class PositionControllerTest {
     void errorMsgShouldBeThrownWhenAPIKeyIsInvalid() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders.post("/position")
-                        .header("token", invalidAPIKey)
+                        .header("API_key", invalidAPIKey)
                         .content(asJsonString(validPositionDTO))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnauthorized());
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/position")
-                        .header("token", "12345678-aaaa-bbbb-1234-000000000000")
+                        .header("API_key", "12345678-aaaa-bbbb-1234-000000000000")
                         .content(asJsonString(validPositionDTO))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andReturn();
@@ -142,10 +142,6 @@ class PositionControllerTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private String getValidKeyFromDatabase() {
-        return "";
     }
 
 }

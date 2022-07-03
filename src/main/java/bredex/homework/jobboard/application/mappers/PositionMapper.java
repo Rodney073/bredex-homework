@@ -18,8 +18,8 @@ public class PositionMapper {
 
         Position position = new Position();
 
-        position.setName(positionDTO.getName());
-        position.setLocation(positionDTO.getLocation());
+        position.validatePositionName(positionDTO.getName()).setName(positionDTO.getName());
+        position.validateLocationName(positionDTO.getLocation()).setLocation(positionDTO.getLocation());
 
         return position;
     }

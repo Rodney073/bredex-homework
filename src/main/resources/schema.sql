@@ -8,7 +8,7 @@ CREATE TABLE Clients
 
 CREATE TABLE Positions
 (
-  positionId BIGINT NOT NULL AUTO_INCREMENT,
+  positionId BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR (50),
   location VARCHAR (50)
 );

@@ -3,6 +3,7 @@ package bredex.homework.jobboard.adapter.persistance.repositories;
 import bredex.homework.jobboard.adapter.persistance.rowmappers.PositionRowMapper;
 import bredex.homework.jobboard.domain.Position;
 import bredex.homework.jobboard.domain.PositionRepository;
+import bredex.homework.jobboard.exceptions.NoSuchPositionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -31,7 +32,7 @@ class PositionRepositoryImpl implements PositionRepository {
 
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sqlQuery, new String[]{"positionId"});
-            
+
             ps.setString(1, position.getName());
             ps.setString(2, position.getLocation());
             return ps;
@@ -55,7 +56,7 @@ class PositionRepositoryImpl implements PositionRepository {
         if (!jdbcTemplate.query(statementCreator, positionRowMapper).isEmpty()) {
             return jdbcTemplate.query(statementCreator, positionRowMapper);
         } else {
-            throw new NoSuchElementException("Sorry, we have no matching positions.");
+            throw new NoSuchPositionException("Sorry, we have no matching positions!");
         }
     }
 
@@ -72,7 +73,7 @@ class PositionRepositoryImpl implements PositionRepository {
         if (!jdbcTemplate.query(statementCreator, positionRowMapper).isEmpty()) {
             return jdbcTemplate.query(statementCreator, positionRowMapper).get(0);
         } else {
-            throw new NoSuchElementException("No such Position with id: " + id);
+            throw new NoSuchPositionException("No such Position with id: " + id);
         }
     }
 }
