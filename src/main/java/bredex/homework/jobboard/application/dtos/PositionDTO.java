@@ -8,13 +8,11 @@ import lombok.Setter;
 @Setter
 public class PositionDTO {
 
-    private String positionId;
     private String name;
     private String location;
 
     @Builder
-    public PositionDTO(String positionId, String name, String location) {
-        this.positionId = positionId;
+    public PositionDTO(String name, String location) {
         this.name = name;
         this.location = location;
     }

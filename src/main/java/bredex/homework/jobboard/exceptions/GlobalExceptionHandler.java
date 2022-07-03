@@ -2,6 +2,8 @@ package bredex.homework.jobboard.exceptions;
 
 import bredex.homework.jobboard.domain.InvalidClientNameException;
 import bredex.homework.jobboard.domain.InvalidEmailException;
+import bredex.homework.jobboard.domain.InvalidPositionLocationException;
+import bredex.homework.jobboard.domain.InvalidPositionNameException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -37,6 +39,34 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         body.put(("timestamp"), LocalDateTime.now());
         body.put(("status"), HttpStatus.BAD_REQUEST.value());
         body.put(("exception"), InvalidClientNameException.class);
+        body.put(("message"), ex.getMessage());
+        body.put(("path"), webRequest.getDescription(false));
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleInvalidPositionNameException(InvalidPositionNameException ex, WebRequest webRequest) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put(("timestamp"), LocalDateTime.now());
+        body.put(("status"), HttpStatus.BAD_REQUEST.value());
+        body.put(("exception"), InvalidPositionNameException.class);
+        body.put(("message"), ex.getMessage());
+        body.put(("path"), webRequest.getDescription(false));
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<Object> handleInvalidPositionLocationException(InvalidPositionLocationException ex, WebRequest webRequest) {
+
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put(("timestamp"), LocalDateTime.now());
+        body.put(("status"), HttpStatus.BAD_REQUEST.value());
+        body.put(("exception"), InvalidPositionLocationException.class);
         body.put(("message"), ex.getMessage());
         body.put(("path"), webRequest.getDescription(false));
 

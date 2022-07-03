@@ -16,9 +16,6 @@ class ClientRepositoryImpl implements ClientRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
-    private ClientRowMapper clientRowMapper;
-
     @Override
     public String registerClient(Client client) {
 

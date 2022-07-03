@@ -1,0 +1,10 @@
+INSERT INTO Positions (positionId, name, location) VALUES (1, 'Java developer', 'London');
+INSERT INTO Positions (positionId, name, location) VALUES (2, 'Java architect', 'London');
+INSERT INTO Positions (positionId, name, location) VALUES (3, 'Product owner', 'London');
+INSERT INTO Positions (positionId, name, location) VALUES (4, 'IT Recruiter', 'Budapest');
+INSERT INTO Positions (positionId, name, location) VALUES (5, 'DevOps architect', 'London');
+INSERT INTO Positions (positionId, name, location) VALUES (6, 'DevOps trainee', 'London');
+INSERT INTO Positions (positionId, name, location) VALUES (7, 'Test automation engineer', 'Berlin');
+INSERT INTO Positions (positionId, name, location) VALUES (8, 'Fullstack software engineer', 'Berlin');
+INSERT INTO Positions (positionId, name, location) VALUES (9, 'Finance controller', 'Budapest');
+INSERT INTO Positions (positionId, name, location) VALUES (10, 'HR trainee', 'Budapest');
