@@ -9,6 +9,7 @@ public class PositionMapper {
 
     public PositionDTO transform(Position position) {
         return new PositionDTO(
+                position.getPositionId(),
                 position.getName(),
                 position.getLocation()
         );

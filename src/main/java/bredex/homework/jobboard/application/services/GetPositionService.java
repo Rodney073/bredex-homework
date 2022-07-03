@@ -1,11 +1,16 @@
 package bredex.homework.jobboard.application.services;
 
 import bredex.homework.jobboard.application.dtos.PositionDTO;
+import bredex.homework.jobboard.application.dtos.URLDTO;
 import bredex.homework.jobboard.application.mappers.PositionMapper;
 import bredex.homework.jobboard.domain.PositionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,5 +33,22 @@ public class GetPositionService {
     public PositionDTO getPositionById(Long id) {
         return positionMapper.transform(positionRepository.getPosition(id));
     }
+
+    public URLDTO getPositionURLList(PositionDTO positionDTO) {
+
+        URLDTO urldto = new URLDTO(new ArrayList<>());
+        List<PositionDTO> positionList = searchPositions(positionDTO);
+
+        for (PositionDTO dto : positionList) {
+            urldto.addURLToList(getPositionURL() + "/position/" + dto.getPositionId());
+        }
+
+        return urldto;
+    }
+
+    public String getPositionURL() {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
+    }
+
 
 }

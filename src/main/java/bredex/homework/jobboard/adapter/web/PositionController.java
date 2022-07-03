@@ -1,6 +1,7 @@
 package bredex.homework.jobboard.adapter.web;
 
 import bredex.homework.jobboard.application.dtos.PositionDTO;
+import bredex.homework.jobboard.application.dtos.URLDTO;
 import bredex.homework.jobboard.application.services.AuthenticateClientService;
 import bredex.homework.jobboard.application.services.CreatePositionService;
 import bredex.homework.jobboard.application.services.GetPositionService;
@@ -39,13 +40,13 @@ public class PositionController {
     }
 
     @GetMapping("position/search")
-    ResponseEntity<List<PositionDTO>> searchPositions(@RequestHeader("API_key") String apiKey, @RequestBody PositionDTO positionDTO) {
+    ResponseEntity<URLDTO> searchPositions(@RequestHeader("API_key") String apiKey, @RequestBody PositionDTO positionDTO) {
 
         if (!authenticateClientService.isKeyValid(apiKey)) {
             throw new InvalidAPIKeyException("Invalid API key!");
         } else {
             return new ResponseEntity<>(
-                    getPositionService.searchPositions(positionDTO), HttpStatus.OK);
+                    getPositionService.getPositionURLList(positionDTO), HttpStatus.OK);
         }
 
     }

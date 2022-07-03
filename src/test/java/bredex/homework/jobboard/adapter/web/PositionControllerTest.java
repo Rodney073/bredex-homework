@@ -33,7 +33,7 @@ class PositionControllerTest {
     @BeforeEach
     void init() {
 
-        validPositionDTO = new PositionDTO("Position name", "MyLocation");
+        validPositionDTO = new PositionDTO(null, "Position name", "MyLocation");
         validAPIKey = "12345678-aaaa-bbbb-1234-000000000001";
         invalidAPIKey = "12345678-aaaa-bbbb-1234-000000000000";
 
@@ -67,7 +67,7 @@ class PositionControllerTest {
     @Test
     void errorMsgShouldBeThrownWhenPositionNameIsTooLong() throws Exception {
 
-        PositionDTO invalidPosition = new PositionDTO("PositionNamePositionNamePositionNamePositionNamePositionName", "Location");
+        PositionDTO invalidPosition = new PositionDTO(null, "PositionNamePositionNamePositionNamePositionNamePositionName", "Location");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/position")
                         .header("API_key", validAPIKey)
@@ -86,7 +86,7 @@ class PositionControllerTest {
 
     @Test
     void errorMsgShouldBeThrownWhenLocationNameIsTooLong() throws Exception {
-        PositionDTO invalidPosition = new PositionDTO("Position name", "LocationLocationLocationLocationLocationLocationLocation");
+        PositionDTO invalidPosition = new PositionDTO(null, "Position name", "LocationLocationLocationLocationLocationLocationLocation");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/position")
                         .header("API_key", validAPIKey)
