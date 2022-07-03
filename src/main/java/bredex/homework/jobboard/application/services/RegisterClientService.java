@@ -15,7 +15,7 @@ public class RegisterClientService {
     @Autowired
     private ClientMapper clientMapper;
 
-    public String registerClient (ClientDTO clientDTO) {
+    public String registerClient(ClientDTO clientDTO) {
         return clientRepository.registerClient(clientMapper.transform(clientDTO));
     }
 }

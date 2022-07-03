@@ -27,6 +27,6 @@ public class ClientController {
         val clientID = registerClientService.registerClient(clientDTO);
 
         return new ResponseEntity<>(
-            clientID, headers, HttpStatus.OK);
+                clientID, headers, HttpStatus.OK);
     }
 }

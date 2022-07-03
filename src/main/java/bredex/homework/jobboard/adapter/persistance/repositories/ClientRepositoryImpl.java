@@ -5,7 +5,6 @@ import bredex.homework.jobboard.domain.Client;
 import bredex.homework.jobboard.domain.ClientRepository;
 
 import java.sql.PreparedStatement;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

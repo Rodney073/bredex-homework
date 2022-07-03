@@ -12,9 +12,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Repository
 class PositionRepositoryImpl implements PositionRepository {

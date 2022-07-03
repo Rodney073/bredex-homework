@@ -4,6 +4,7 @@ import bredex.homework.jobboard.domain.Position;
 import org.springframework.stereotype.Component;
 
 import org.springframework.jdbc.core.RowMapper;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
