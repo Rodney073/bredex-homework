@@ -31,6 +31,10 @@ java -jar target/*.jar
 
 ![registerClient](doc/ClientController_registerClient.svg)
 
+![getClient](doc/PositionController_getPositionById.svg)
+
+![Alt text](doc/ClientController_registerClient.svg)
+
 The application is running on: localhost:3300/
 
 Swagger:
