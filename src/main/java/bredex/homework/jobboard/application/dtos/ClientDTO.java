@@ -1,6 +1,6 @@
 package bredex.homework.jobboard.application.dtos;
 
-import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 public class ClientDTO {
 
-    @Parameter(hidden = true)
+    @Hidden
     private final String clientKey;
-    @Parameter(hidden = true)
+    @Hidden
     private final Long getClientId;
     private final String clientName;
     private final String email;
