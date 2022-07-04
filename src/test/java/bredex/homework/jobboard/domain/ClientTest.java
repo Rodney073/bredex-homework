@@ -72,7 +72,7 @@ class ClientTest {
     }
 
     @Test
-    public void EmailValidation() {
+    public void emailValidation() {
         //Too long, invalid address
         InvalidEmailException ex = assertThrows(InvalidEmailException.class, () -> {
             client.validateEmail("Email@EmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailEmailE.com");
@@ -83,7 +83,7 @@ class ClientTest {
     }
 
     @Test
-    public void InvalidClientNameShouldThrowException() {
+    public void invalidClientNameShouldThrowException() {
 
         InvalidClientNameException ex = assertThrows(InvalidClientNameException.class, () -> {
             client.validateClientName("ClientNameClientNameClientNameClientNameClientNameClientNameClientNameClientNameClientNameClientName1");
@@ -100,7 +100,7 @@ class ClientTest {
     }
 
     @Test
-    public void Valid_100CharLongClientNameShouldNotThrowException() {
+    public void valid_100CharLongClientNameShouldNotThrowException() {
 
         assertDoesNotThrow(() -> {
             client.validateClientName("ClientNameClientNameClientNameClientNameClientNameClientNameClientNameClientNameClientNameClientName");

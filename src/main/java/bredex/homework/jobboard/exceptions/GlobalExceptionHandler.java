@@ -2,7 +2,7 @@ package bredex.homework.jobboard.exceptions;
 
 import bredex.homework.jobboard.domain.InvalidClientNameException;
 import bredex.homework.jobboard.domain.InvalidEmailException;
-import bredex.homework.jobboard.domain.InvalidPositionLocationException;
+import bredex.homework.jobboard.domain.InvalidLocationException;
 import bredex.homework.jobboard.domain.InvalidPositionNameException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -63,12 +63,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<Object> handleInvalidPositionLocationEx(InvalidPositionLocationException ex, WebRequest webRequest) {
+    public ResponseEntity<Object> handleInvalidPositionLocationEx(InvalidLocationException ex, WebRequest webRequest) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put(("timestamp"), LocalDateTime.now());
         body.put(("status"), HttpStatus.BAD_REQUEST);
-        body.put(("exception"), InvalidPositionLocationException.class);
+        body.put(("exception"), InvalidLocationException.class);
         body.put(("message"), ex.getMessage());
         body.put(("path"), webRequest.getDescription(false));
 

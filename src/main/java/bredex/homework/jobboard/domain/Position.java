@@ -26,20 +26,20 @@ public class Position {
 
     public Position validatePositionName(String positionName) {
         if (positionName.length() > 50) {
-            throw new InvalidClientNameException("The position name can't be longer than 50 characters!");
+            throw new InvalidPositionNameException("The position name can't be longer than 50 characters!");
         }
         if (positionName.equals("")) {
-            throw new InvalidClientNameException("The position name can not be empty!");
+            throw new InvalidPositionNameException("The position name can not be empty!");
         }
         return this;
     }
 
     public Position validateLocationName(String locationName) {
         if (locationName.length() > 50) {
-            throw new InvalidClientNameException("The location name can't be longer than 50 characters!");
+            throw new InvalidLocationException("The location name can't be longer than 50 characters!");
         }
         if (locationName.equals("")) {
-            throw new InvalidClientNameException("The location name can not be empty!");
+            throw new InvalidLocationException("The location name can not be empty!");
         }
         return this;
     }
