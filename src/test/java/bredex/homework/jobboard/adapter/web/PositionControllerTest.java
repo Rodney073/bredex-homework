@@ -1,6 +1,7 @@
 package bredex.homework.jobboard.adapter.web;
 
 import bredex.homework.jobboard.application.dtos.PositionDTO;
+import bredex.homework.jobboard.helper.UrlTest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class PositionControllerTest {
     @BeforeEach
     void init() {
 
-        validPositionDTO = new PositionDTO(null, "Position name", "MyLocation");
+        validPositionDTO = new PositionDTO(null, "Java", "London");
         validAPIKey = "12345678-aaaa-bbbb-1234-000000000001";
         invalidAPIKey = "12345678-aaaa-bbbb-1234-000000000000";
 
@@ -117,13 +118,56 @@ class PositionControllerTest {
                 .andExpect(status().isUnauthorized());
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/position")
-                        .header("API_key", "12345678-aaaa-bbbb-1234-000000000000")
+                        .header("API_key", invalidAPIKey)
                         .content(asJsonString(validPositionDTO))
                         .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
                 .andReturn();
 
         assertTrue(mvcResult.getResponse().getContentAsString().contains("Invalid API key!"));
 
+    }
+
+    @Test
+    void errorMsgShouldBeThrownWhenAPIKeyIsInvalidAtSearch() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/position/search")
+                        .header("API_key", invalidAPIKey)
+                        .content(asJsonString(validPositionDTO))
+                        .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized());
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/position/search")
+                        .header("API_key", invalidAPIKey)
+                        .content(asJsonString(validPositionDTO))
+                        .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        assertTrue(mvcResult.getResponse().getContentAsString().contains("Invalid API key!"));
+
+    }
+
+    @Test
+    void getURLsWhenCorrectSearchRequestIsSent() throws Exception {
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/position/search")
+                        .header("API_key", validAPIKey)
+                        .content(asJsonString(validPositionDTO))
+                        .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/position/search")
+                        .header("API_key", validAPIKey)
+                        .content(asJsonString(validPositionDTO))
+                        .contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+
+        UrlTest urlTest = new ObjectMapper().readValue(mvcResult.getResponse().getContentAsString(), UrlTest.class);
+
+        assertEquals(2, urlTest.getListOfURLs().size());
+
+        for (int i = 0; i < urlTest.getListOfURLs().size(); i++) {
+            assertTrue(isValidURL(urlTest.getListOfURLs().get(i)));
+        }
     }
 
 
