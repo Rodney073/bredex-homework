@@ -1,4 +1,4 @@
-package bredex.homework.jobboard.adapter.persistance.rowmappers;
+package bredex.homework.jobboard.adapter.persistence.rowmappers;
 
 import bredex.homework.jobboard.domain.Position;
 import org.springframework.stereotype.Component;
@@ -11,6 +11,7 @@ import java.sql.SQLException;
 @Component
 public class PositionRowMapper implements RowMapper<Position> {
 
+    //Mapping each database row to Position object
     @Override
     public Position mapRow(ResultSet rs, int rowNum) throws SQLException {
 

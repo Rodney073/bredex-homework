@@ -24,6 +24,9 @@ public class Position {
         this.location = location;
     }
 
+    /**
+     * Validating position name input
+     */
     public Position validatePositionName(String positionName) {
         if (positionName.length() > 50) {
             throw new InvalidPositionNameException("The position name can't be longer than 50 characters!");
@@ -34,6 +37,9 @@ public class Position {
         return this;
     }
 
+    /**
+     * Validating location name input
+     */
     public Position validateLocationName(String locationName) {
         if (locationName.length() > 50) {
             throw new InvalidLocationException("The location name can't be longer than 50 characters!");
@@ -44,7 +50,10 @@ public class Position {
         return this;
     }
 
-    public String getPositionURL() {
+    /**
+     * Get currently used request URL
+     */
+    public String getRequestURL() {
         return ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
                 .getRequest().getRequestURL().toString();
     }

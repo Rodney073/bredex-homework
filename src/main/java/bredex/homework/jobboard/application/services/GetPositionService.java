@@ -21,6 +21,10 @@ public class GetPositionService {
     @Autowired
     PositionMapper positionMapper;
 
+    /**
+     * Searching for positions in db
+     * Transforming DTO to domain object
+     */
     public List<PositionDTO> searchPositions(PositionDTO positionDTO) {
         return positionRepository.searchPositions(positionMapper.transform(positionDTO))
                 .stream()
@@ -28,23 +32,35 @@ public class GetPositionService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Finding position by ID
+     * Transforming returning domain object to DTO
+     */
     public PositionDTO getPositionById(Long id) {
         return positionMapper.transform(positionRepository.getPosition(id));
     }
 
+    /**
+     * Generating URL DTO-s out of the found positions by: searchPositions()
+     */
     public URLDTO getPositionURLList(PositionDTO positionDTO) {
 
         URLDTO urldto = new URLDTO(new ArrayList<>());
+
+        // Searching for positions by name and location
         List<PositionDTO> positionList = searchPositions(positionDTO);
 
+        //Building URL out of position data
         for (PositionDTO dto : positionList) {
-            urldto.addURLToList(getPositionURL() + "/position/" + dto.getPositionId());
+            urldto.addURLToList(getActualBaseURL() + "/position/" + dto.getPositionId());
         }
-
         return urldto;
     }
 
-    public String getPositionURL() {
+    /**
+     * Get currently used base URL
+     */
+    public String getActualBaseURL() {
         return ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
     }
 

@@ -10,6 +10,9 @@ public class AuthenticateClientService {
     @Autowired
     ClientRepository clientRepository;
 
+    /**
+     * Validating clint API key
+     */
     public boolean isKeyValid(String key) {
         return clientRepository.isKeyValid(key);
     }

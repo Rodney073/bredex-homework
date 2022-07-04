@@ -15,6 +15,10 @@ public class CreatePositionService {
     @Autowired
     PositionMapper positionMapper;
 
+    /**
+     * Saving new position to database
+     * Transforming DTO to domain object
+     */
     public String createPosition(PositionDTO positionDTO) {
         return positionRepository.createPosition(positionMapper.transform(positionDTO));
     }

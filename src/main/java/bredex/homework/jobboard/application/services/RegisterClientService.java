@@ -15,6 +15,10 @@ public class RegisterClientService {
     @Autowired
     private ClientMapper clientMapper;
 
+    /**
+     * Saving new client to database
+     * Transforming DTO to domain object
+     */
     public String registerClient(ClientDTO clientDTO) {
         return clientRepository.registerClient(clientMapper.transform(clientDTO));
     }

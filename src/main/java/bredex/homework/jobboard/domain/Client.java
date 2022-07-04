@@ -20,7 +20,9 @@ public class Client {
     private String clientName;
     private String email;
 
-
+    /**
+     * Validating client email input
+     */
     public Client validateEmail(String email) {
         if (!email.matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
                 + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")) {
@@ -32,6 +34,9 @@ public class Client {
         return this;
     }
 
+    /**
+     * Validating client name input
+     */
     public Client validateClientName(String clientName) {
         if (clientName.length() > 100) {
             throw new InvalidClientNameException("The name can't be longer than 100 characters!");

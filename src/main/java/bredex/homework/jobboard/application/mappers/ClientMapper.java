@@ -23,11 +23,11 @@ public class ClientMapper {
         client.setClientKey(((clientDTO.getClientKey() == null) ? null : clientDTO.getClientKey()));
         client.setClientId(
                 ((clientDTO.getGetClientId() == null) ? null : clientDTO.getGetClientId()));
-        client
-                .validateClientName(clientDTO.getClientName())
+        // Set client name if valid.
+        client.validateClientName(clientDTO.getClientName())
                 .setClientName(clientDTO.getClientName());
-        client
-                .validateEmail(clientDTO.getEmail())
+        // Set client email if valid
+        client.validateEmail(clientDTO.getEmail())
                 .setEmail(client.getEmail());
 
         return client;

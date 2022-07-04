@@ -1,6 +1,6 @@
-package bredex.homework.jobboard.adapter.persistance.repositories;
+package bredex.homework.jobboard.adapter.persistence.repositories;
 
-import bredex.homework.jobboard.adapter.persistance.rowmappers.ClientRowMapper;
+import bredex.homework.jobboard.adapter.persistence.rowmappers.ClientRowMapper;
 import bredex.homework.jobboard.domain.Client;
 import bredex.homework.jobboard.domain.ClientRepository;
 
@@ -22,14 +22,25 @@ class ClientRepositoryImpl implements ClientRepository {
     @Autowired
     private ClientRowMapper clientRowMapper;
 
+    /**
+     * Saving new client to database
+     *
+     * @param client - Client object that contains client data (name, email)
+     * @return String - Generated client API key (UUID format)
+     */
     @Override
     public String registerClient(Client client) {
 
+        //SQL query for saving clients to database
         String sqlQuery = "insert into Clients (clientKey, clientName, email) values (?, ?, ?)";
+
+        //Generating sequential client ID
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
+        //Generating unique client API key
         client.setUniqueClientKey();
 
+        //Update database with preventing SQL injection
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sqlQuery, new String[]{"clientId"});
             ps.setString(1, client.getClientKey());
@@ -41,9 +52,16 @@ class ClientRepositoryImpl implements ClientRepository {
         return client.getClientKey();
     }
 
+    /**
+     * Checking if API key already exists in database
+     *
+     * @param key - API key to be checked
+     * @return boolean
+     */
     @Override
     public boolean isKeyValid(String key) {
 
+        //SQL query for finding row by clint API key
         String sqlQuery = "SELECT TOP 1 * FROM Clients WHERE Clients.clientKey = ?;";
 
         PreparedStatementCreator statementCreator = con -> {
@@ -52,6 +70,7 @@ class ClientRepositoryImpl implements ClientRepository {
             return ps;
         };
 
+        //If there is result, the key is valid
         return jdbcTemplate.query(statementCreator, clientRowMapper).size() != 0;
     }
 }

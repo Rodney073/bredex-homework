@@ -1,4 +1,4 @@
-package bredex.homework.jobboard.adapter.persistance.rowmappers;
+package bredex.homework.jobboard.adapter.persistence.rowmappers;
 
 import bredex.homework.jobboard.domain.Client;
 
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClientRowMapper implements RowMapper<Client> {
 
+    //Mapping each database row to Client object
     @Override
     public Client mapRow(ResultSet rs, int rowNum) throws SQLException {
 

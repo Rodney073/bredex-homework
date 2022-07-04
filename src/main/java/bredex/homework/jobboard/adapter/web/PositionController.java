@@ -25,6 +25,9 @@ public class PositionController {
     @Autowired
     private AuthenticateClientService authenticateClientService;
 
+    /**
+     * Saving new position to database
+     */
     @PostMapping("position")
     ResponseEntity<String> createPosition(@RequestHeader("API_key") String apiKey, @RequestBody PositionDTO positionDTO) {
 
@@ -32,31 +35,33 @@ public class PositionController {
             throw new InvalidAPIKeyException("Invalid API key!");
         } else {
             val url = createPositionService.createPosition(positionDTO);
-            return new ResponseEntity<>(
-                    url, HttpStatus.OK);
+            return new ResponseEntity<>(url, HttpStatus.OK);
         }
     }
 
+    /**
+     * Searching for positions by name and location
+     */
     @GetMapping("position/search")
     ResponseEntity<URLDTO> searchPositions(@RequestHeader("API_key") String apiKey, @RequestBody PositionDTO positionDTO) {
 
         if (!authenticateClientService.isKeyValid(apiKey)) {
             throw new InvalidAPIKeyException("Invalid API key!");
         } else {
-            return new ResponseEntity<>(
-                    getPositionService.getPositionURLList(positionDTO), HttpStatus.OK);
+            return new ResponseEntity<>(getPositionService.getPositionURLList(positionDTO), HttpStatus.OK);
         }
-
     }
 
+    /**
+     * Finding position by ID
+     */
     @GetMapping("position/{id}")
     ResponseEntity<Object> getPositionById(@RequestHeader("API_key") String apiKey, @PathVariable Long id) {
 
         if (!authenticateClientService.isKeyValid(apiKey)) {
             throw new InvalidAPIKeyException("Invalid API key!");
         } else {
-            return new ResponseEntity<>(
-                    getPositionService.getPositionById(id), HttpStatus.OK);
+            return new ResponseEntity<>(getPositionService.getPositionById(id), HttpStatus.OK);
         }
     }
 
