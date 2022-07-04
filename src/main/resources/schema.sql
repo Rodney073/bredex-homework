@@ -3,7 +3,7 @@ CREATE TABLE Clients
   clientKey VARCHAR (36) PRIMARY KEY,
   clientId BIGINT AUTO_INCREMENT,
   clientName VARCHAR (100),
-  email VARCHAR (150)
+  email VARCHAR (250)
 );
 
 CREATE TABLE Positions

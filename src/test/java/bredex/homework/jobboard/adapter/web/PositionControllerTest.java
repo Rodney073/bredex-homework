@@ -62,6 +62,7 @@ class PositionControllerTest {
                 .andReturn();
 
         assertTrue(isValidURL(mvcResult.getResponse().getContentAsString()));
+
     }
 
     @Test
@@ -82,10 +83,12 @@ class PositionControllerTest {
                 .andReturn();
 
         assertTrue(mvcResult.getResponse().getContentAsString().contains("The position name can't be longer than 50 characters!"));
+
     }
 
     @Test
     void errorMsgShouldBeThrownWhenLocationNameIsTooLong() throws Exception {
+
         PositionDTO invalidPosition = new PositionDTO(null, "Position name", "LocationLocationLocationLocationLocationLocationLocation");
 
         mockMvc.perform(MockMvcRequestBuilders.post("/position")
@@ -120,7 +123,6 @@ class PositionControllerTest {
                 .andReturn();
 
         assertTrue(mvcResult.getResponse().getContentAsString().contains("Invalid API key!"));
-
 
     }
 

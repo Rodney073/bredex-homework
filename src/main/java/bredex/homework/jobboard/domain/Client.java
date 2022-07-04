@@ -22,8 +22,12 @@ public class Client {
 
 
     public Client validateEmail(String email) {
-        if (!email.matches("[\\w\\d\\-_.]*@[\\w\\d\\-_]*\\.[\\w.]*")) {
+        if (!email.matches("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")) {
             throw new InvalidEmailException("Invalid email address format!");
+        }
+        if (email.length() > 250) {
+            throw new InvalidEmailException("The email can't be longer than 250 characters!");
         }
         return this;
     }
