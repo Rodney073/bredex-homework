@@ -29,18 +29,18 @@ cd bredex-homework
 java -jar target/*.jar
 ```
 
-![registerClient](doc/ClientController_registerClient.svg)
-
-![getClient](doc/PositionController_getPositionById.svg)
-
-![Alt text](doc/ClientController_registerClient.svg)
-
-The application is running on: localhost:3300/
-
-Swagger:
-http://localhost:3300/swagger-ui/index.html#
+- By default this application runs on: localhost:3300
+- Swagger: http://localhost:3300/swagger-ui/index.html#
 
 
-localhost:3300/client
-localhost:3300/position
-localhost:3300/position/search
+
+Improvement plan
+---------------------
+Development:
+- I'd suggest implementing a proper user Authentication, with e-mail verification
+- We need a real database
+- More testing and error handling. Integration tests in staging environment.
+- 
+Deployment:
+- I'd create a proper build pipeline, which would produce deployable assets for example a .jar or a Docker container containing the jar file.
+- Then, I'd collaborate with the infra team to deploy it to an environment where it could be tested.
